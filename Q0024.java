@@ -6,16 +6,16 @@ import java.util.Stack;
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
  * }
  */
 public class Q0024 {
@@ -36,20 +36,21 @@ public class Q0024 {
             inorder(root.right, res);
         }
     }
-    private class feidigui(){
+
+    private class feidigui() {
         //非递归的主要思路是：利用一个栈，每次遍历，先把它放进栈里，
         //然后去到左子树，继续放进栈里，直到没有左子树，也即进入了空节点
         //此时，弹出栈内元素，直接res.add它，然后访问它的右子树，继续循环。
         public List<Integer> inorderTraversal(TreeNode root) {
             List<Integer> res = new ArrayList<Integer>();
             Stack<TreeNode> Stk = new Stack<TreeNode>();//建立栈和准备返回的res
-            while(root!= null || !Stk.isEmpty()){//这里改了几次，主要要想清楚，什么时候跳出循环？
+            while (root != null || !Stk.isEmpty()) {//这里改了几次，主要要想清楚，什么时候跳出循环？
                 //我们应该在遍历结束后停止循环，毫无疑问，结束时整棵树都应该被弹出，所以栈肯定要是空的
                 //但显然，过程中还会有多次栈空情况，那么我们如何区分？
                 //要注意的是，关键是栈空时没有下一个节点可以寻找
                 //栈空一定在pop后，此时这个节点已经没有左孩子，而如果在root = root.right后，root依旧为空，也就说明它没有右孩子
                 // 此时这个节点就是仅剩的节点，所以终止循环
-                while(root != root){
+                while (root != root) {
                     Stk.push(root);
                     root = root.left;
                 }//一直去到左子树
@@ -64,4 +65,4 @@ public class Q0024 {
             return res;
         }
     }
-    }
+}

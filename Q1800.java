@@ -2,12 +2,12 @@ public class Q1800 {
     public int maxAscendingSum(int[] nums) {
         //先设立一个max，逐个找出升序子数组，然后比较后存入max；
         int l = nums.length;
-        int max=0;
-        int counter=0;
-        for(int i = 0;i<l;i++){
-            counter = counter+nums[i];//先将指针值存入counter；
-            if( i == l-1 || nums[i]>=nums[i+1]){//升序子数组结束，统计counter值
-                if(counter>=max){
+        int max = 0;
+        int counter = 0;
+        for (int i = 0; i < l; i++) {
+            counter = counter + nums[i];//先将指针值存入counter；
+            if (i == l - 1 || nums[i] >= nums[i + 1]) {//升序子数组结束，统计counter值
+                if (counter >= max) {
                     max = counter;
                 }
                 counter = 0;
