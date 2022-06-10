@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+//给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -18,7 +19,7 @@ import java.util.Stack;
  * }
  * }
  */
-public class Q0024 {
+public class Q0094 {
     private class digui() {
         //递归思想是访问左子树→访问其本身→访问右子树
         public List<Integer> inorderTraversal(TreeNode root) {
