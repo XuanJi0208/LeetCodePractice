@@ -51,7 +51,7 @@ public class Q0094 {
                 //要注意的是，关键是栈空时没有下一个节点可以寻找
                 //栈空一定在pop后，此时这个节点已经没有左孩子，而如果在root = root.right后，root依旧为空，也就说明它没有右孩子
                 // 此时这个节点就是仅剩的节点，所以终止循环
-                while (root != root) {
+                while (root != null) {
                     Stk.push(root);
                     root = root.left;
                 }//一直去到左子树
