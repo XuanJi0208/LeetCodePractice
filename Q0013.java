@@ -4,19 +4,19 @@
  */
 public class Q0013 {
     public int romanToInt(String s) {
-        int sum = 0;
-        int preNum = getValue(s.charAt(0));
+        int res = 0;
+        int pre = getValue(s.charAt(0));
         for(int i = 1;i < s.length(); i ++) {
             int num = getValue(s.charAt(i));
-            if(preNum < num) {
-                sum -= preNum;
+            if(pre < num) {
+                res -= pre;
             } else {
-                sum += preNum;
+                res += pre;
             }
-            preNum = num;
+            pre = num;
         }
-        sum += preNum;
-        return sum;
+        res += pre;
+        return res;
     }
 
     private int getValue(char ch) {
