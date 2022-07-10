@@ -9,6 +9,7 @@
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class R0022 {
+    //双指针，一个指向head，一个指向head后k个节点，两者一起向后移动
     public ListNode getKthFromEnd(ListNode head, int k) {
         if(head == null){
             return head;
