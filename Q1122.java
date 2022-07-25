@@ -6,24 +6,24 @@
 public class Q1122 {
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
         int MAX = 0;
-        for( int x:arr1 ){
-            MAX = Math.max(MAX,x);
+        for (int x : arr1) {
+            MAX = Math.max(MAX, x);
         }
-        int[] fre = new int[MAX+1];
-        for( int x: arr1 ){
+        int[] fre = new int[MAX + 1];
+        for (int x : arr1) {
             fre[x]++;
         }
         int[] res = new int[arr1.length];
         int index = 0;
-        for( int x : arr2 ){
-            for(int i = 0 ; i < fre[x];i++){
+        for (int x : arr2) {
+            for (int i = 0; i < fre[x]; i++) {
                 res[index++] = x;
             }
             fre[x] = 0;
         }
-        for(int i = 0;i<fre.length;i++){
-            if(fre[i]!=0){
-                for(int j = 0 ; j < fre[i];j++){
+        for (int i = 0; i < fre.length; i++) {
+            if (fre[i] != 0) {
+                for (int j = 0; j < fre[i]; j++) {
                     res[index++] = i;
                 }
                 fre[i] = 0;
