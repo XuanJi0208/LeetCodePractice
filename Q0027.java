@@ -13,6 +13,7 @@ public class Q0027 {
             if (nums[i] == val) {
                 nums[i] = nums[end - 1];
                 end--;
+
             } else {
                 i++;
             }
