@@ -41,5 +41,32 @@ public class Q0035 {
             }
             return low;
         }
+
+        //旧题重做又写了一遍，这次对于优先动low还是优先动high理解更深了一点。做的时候主要要考虑的，是left(low)指的是哪里，right(high)指的又是哪里。
+        //不管是左闭右开还是双闭，如果最后想要输出的是left，那么注意当nums[mid]和target相等的时候，一定是动right不动left，如果动了left，很可能会丢掉目标位置。
+        //所以这里虽然不比较nums[k] == target在内存利用率上更好，我还是认为去比较一下，能让代码更易读，逻辑更清晰。之所以时间没有太大差异，一是可能target存在数组里的可能性不够大
+        //而是这个题本身的测试用例就不够大，导致二分法后几乎都是0ms用时，看不出明显影响。
+        //下面贴出左闭右开的代码。
+
+    public int searchInsert3(int[] nums, int target) {
+        int len = nums.length;
+        int left = 0;
+        int right = len;
+        int mid = (left + right)/2;
+        //这里为了方便，稍微思虑一下区间开闭问题。首先是这题实际上不需要真的找到，只需要找到它该在的位置就行了
+        //因此，如果位置落在left这边，那么左边用闭区间，其位置直接落在left就是最好的
+        //如果位置往right那边落，那么要考虑，如果右侧选择闭区间，其位置也要往right后面落
+        //因此直接选择开区间，让它落在right那个位置就行，循环跳出条件就是left和right相等
+        while(left<right){
+            mid = (left + right)/2;
+            if(target>nums[mid]){
+                left = mid+1;
+            }
+            else{
+                right = mid;
+            }
+        }
+        return left;
+    }
     }
 
