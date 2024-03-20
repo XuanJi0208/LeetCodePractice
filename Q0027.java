@@ -20,4 +20,22 @@ public class Q0027 {
         }
         return i;
     }
+
+    /**
+     * 回头再做一次就直接出了，用的方法跟上面那个不一样，我感觉新的方法更好更容易理解。
+     */
+    public int removeElement2(int[] nums, int val) {
+        //简单一想，数组中时刻记录删除了k个数字，如果当前数字不需要删除，则把它往前移k位，如果需要删除，就不动它，让他自己覆盖，最后把长度减个k就可以了
+        int k = 0;
+        int len = nums.length;
+        for(int i = 0;i<len;i++){
+            if(nums[i]==val){
+                k++;
+            }
+            else{
+                nums[i-k]=nums[i];
+            }
+        }
+        return len-k;
+    }
 }
