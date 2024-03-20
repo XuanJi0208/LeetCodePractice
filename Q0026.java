@@ -18,4 +18,26 @@ public class Q0026 {
         }
         return now+1;
     }
+
+    /**
+     * 又重写了一遍，发现我以前为啥那么爱用while啊。。
+     */
+    public int 2(int[] nums) {
+        //这个题跟27类似，直接去检测它和前面那位相不相等就可以了
+        int len = nums.length;
+        if(len < 2){
+            //处理一下只有一个元素或者没有元素的特殊情况
+            return len;
+        }
+        int k = 0;
+        for(int i =1;i<len;i++){
+            if(nums[i]==nums[i-1]){
+                k++;
+            }
+            else{
+                nums[i-k]=nums[i];
+            }
+        }
+        return len - k;
+    }
 }
