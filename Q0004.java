@@ -110,4 +110,63 @@ public class Q0004 {
             }
         }
     }
+
+
+    /**
+     *
+     * 下面这是自己又写了一遍，碰到了这些问题：首先，找的是第k大还是第k位置这件事情，一定要想清楚！！！！！
+     * 其次，k==1这个情况，在构思的时候想的很清楚，反而真写的时候总是忘，这个要注意
+     * 第三，start+这个部分不要丢，丢太多次了
+     * 如果说这些是因为题目复杂，真正最大的问题，其实是pos1和pos2的位置：
+     * 因为是第k大，所以如果不是越界到end1了，那么单纯用start+k/2后，还要做一个-1，这也就是第一个问题出现的，一定要前后想清楚，不然全部都会串乱掉。
+     */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        //最好想的应该是直接将两个数组合并，找第(m+n)/2位置的数
+        //不合并数组，直接找第(m+n)/2位置的数
+        //抽象问题：找两个数组中k位置的数。
+        //尝试逼近？如果k>1,那么两个数组第一位互相比较，小的那位可以直接排除，然后k减1，不停逼近至k=1
+        //有没有可能一次多排除一些？
+        //各自拿k/2的位置比较？能否确定一定不会删除k位置的数？可以。
+        //小的那边，k/2的位置处，至多有k-2个数字比他小，一定不满足k位置。
+        //思路就是拿数字中k/2位置的数字比较，把小的那边前面的数字全部删掉（包括其本身）
+        int length = nums1.length + nums2.length;
+        //记录两数组总长度
+        double res1 = findKthSortedArrays( nums1, nums2, 0, nums1.length - 1, 0, nums2.length - 1, (length + 1)/2);
+        double res2 = findKthSortedArrays( nums1, nums2, 0, nums1.length - 1, 0, nums2.length - 1, (length + 2)/2);
+        System.out.println(res1);
+        System.out.println(res2);
+        return ( res1 + res2 ) / 2;
+    }
+
+    public double findKthSortedArrays(int[] nums1,int[] nums2,int start1,int end1, int start2, int end2, int k){
+        //nums1和nums2即为所用数组，start1和end1是数组1所用头尾，start2同理
+        //首先考虑特殊情况：有一个数组为空，这时候直接返回非空数组中第k个数字即可
+        int length1 = end1 - start1 + 1;
+        int length2 = end2 - start2 + 1;
+        if ( length1 > length2 ){
+            return findKthSortedArrays( nums2, nums1, start2, end2, start1, end1, k);
+            //交换nums1和nums2，令小的始终在前面
+        }
+
+        if ( length1 <= 0 ){
+            return nums2[ start2 + k - 1 ];
+            //如果有一个数组空了，直接返回非空数组的第k个数字。
+        }
+        //两个数组目前都非空，找第k/2个位置比较：
+        //这里要考虑start + k/2后是否越界。要检查start + k/2是否比相应end大，始终取两者间的最小值
+        int pos1 = Math.min( start1 + k/2 - 1, end1 );
+        int pos2 = Math.min( start2 + k/2 - 1, end2 );
+
+        if( k == 1 ){
+            return Math.min( nums1[start1], nums2[start2] );
+        }
+        if ( nums1[ pos1 ] < nums2[ pos2 ] ){
+            //nums1处小，删掉它及它前面的元素，考虑k要怎么变：
+            //在这种情况下，显然减少了pos1 + 1 - start1个元素，所以k要减去这些元素量
+            return findKthSortedArrays( nums1, nums2, pos1 + 1, end1, start2, end2, k - pos1 + start1 - 1 );
+        }
+        else {
+            return findKthSortedArrays( nums1, nums2, start1, end1, pos2 + 1, end2, k - pos2 + start2 - 1);
+        }
+    }
 }
