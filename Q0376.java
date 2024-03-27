@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * @author XuanJi
  * 如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为 摆动序列 。第一个差（如果存在的话）可能是正数或负数。仅有一个元素或者含两个不等元素的序列也视作摆动序列。
@@ -10,6 +12,7 @@
  * 注意开头的情况：如果开头两个的差值是0，那么此时MAX为1，我们要先初始化，令pre和p找到那个差值不为0的数值对，否则直接返回1.
  */
 public class Q0376 {
+    Arrays.sort();
     public int WRONGwiggleMaxLength(int[] nums) {
         if (nums.length < 2) {
             return nums.length;
