@@ -17,4 +17,18 @@ public class Q0206 {
         }
         return pre;
     }
+    /**
+     * 两年过去了，重新写一次，这下精简了一些
+     */
+    public ListNode reverseList2(ListNode head) {
+        ListNode res = new ListNode();
+        ListNode p = new ListNode();
+        while ( head != null){
+            p = head.next;
+            head.next = res.next;
+            res.next = head;
+            head = p;
+        }
+        return res.next;
+    }
 }
